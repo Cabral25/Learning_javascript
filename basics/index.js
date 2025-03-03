@@ -43,7 +43,7 @@ name = 'Otto'
 
 console.log(age);
 console.log(price);
-console.log(`you are ${age}`);
+console.log(`you are ${age}`); // you are 25
 console.log(`The price is $${price}`);
 console.log(`Your gpa is ${gpa}`);
 console.log(`My name is ${name}`);
@@ -203,3 +203,259 @@ console.log(max); // 25
 
 let min = Math.min(a, b, h); // menor valor
 console.log(min); // 2
+
+
+
+// ===> if/else statements
+
+
+let _age = 13;
+
+if (_age >= 18){
+    console.log('You are old enough.');
+}
+else{
+    console.log('You are not old enough.'); // You are not old enough
+}
+
+let time = 14;
+
+if(time < 12){
+    console.log('Good morning');
+}
+else{
+    console.log('Good afternoon.'); // Good afternoon.
+}
+
+let isStudent = true;
+
+if(isStudent){
+    console.log('You are a student.');
+}
+else{
+    console.log('You are not a student.'); // You are a student
+}
+
+
+let _idade = -1;
+let hasLicense = false;
+
+
+if(_idade >= 16){
+    console.log('You are old enough to drive.');
+
+    if(hasLicense){
+        console.log('You have your license');
+    }
+    else{
+        console.log('You do not have your license yet.');
+    }
+}
+else{
+    console.log('You are not old enough to drive.');
+}
+
+
+if(_idade >= 100){
+    console.log('You are too old to enter this site');
+}
+else if(_idade >= 18){
+    console.log('You are old enough to enter this site');
+}
+else if(_idade < 0){
+    console.log('Your age cant be below 0');
+}
+else{
+    console.log('You are not old enough to enter this site.');
+}
+
+
+// ===> ternary operator
+
+
+let numero = 21;
+let message = numero >= 18 ? "You're an adult" : "You're a minor.";
+console.log(message);
+
+
+// ===> SWITCHES
+
+
+let day = 5;
+
+switch(day){
+    case 1:
+        console.log('It is monday');
+        break;
+    case 2:
+        console.log('it is tuesday');
+        break;
+    case 3:
+        console.log('it is wednesday');
+        break;
+    case 4:
+        console.log('it is tuesday');
+        break;
+    case 5:
+        console.log('it is thursday');
+        break;
+    case 6:
+        console.log('it is saturday');
+        break;
+    case 7:
+        console.log('it is sunday');
+        break;
+    default:
+        console.log(`${day} is not a day.`);
+}
+
+let testScore = 50;
+let letterGrade;
+
+switch(true){
+    case testScore >= 90:
+        letterGrade = 'A';
+        break;
+    case testScore >= 80:
+        letterGrade = 'B';
+        break;
+    case testScore >= 70:
+        letterGrade = 'C';
+        break;
+    default:
+        letterGrade = 'F';
+}
+
+console.log(letterGrade);
+
+
+// ===> Strings
+
+
+let username_ = '   BroCode    ';
+
+console.log(username_.charAt(0)); // B retorna a string em determinada posição
+
+console.log(username_.indexOf('B')); // 0 retorna o index da primeira ocorrência de uma string
+console.log(username_.indexOf('b')); // -1 string não encontada
+
+console.log(username_.indexOf('o')); // 2
+console.log(username_.lastIndexOf('o')); // 4 retorna o index da última ocorrência de uma string
+
+console.log(username_.length); // 7
+
+username_ = username_.trim(); // elimina espaços em branco
+console.log(username_);
+
+username_ = username_.toUpperCase();
+console.log(username_); // BROCODE
+
+username_ = username_.toLowerCase();
+console.log(username_); // brocode
+
+console.log(username_.repeat(2)); // brocodebrocode
+
+let result = username_.startsWith("b");
+console.log(result); // true
+if(result){
+    console.log('Username starts with the letter b');
+}
+else{
+    console.log("Username does not start with the letter b");
+}
+
+console.log(username_.includes('bro')); // true
+console.log(username_.includes('r')); // true
+console.log(username_.includes('h')); // false
+
+
+let phoneNumber = '123-456-789';
+
+phoneNumber = phoneNumber.replaceAll('-', ''); // substituir todos
+console.log(phoneNumber); // 123456789
+
+phoneNumber = phoneNumber.padStart(15, '0'); // inserir os zeros até que a string tenha 15 caracteres
+console.log(phoneNumber); // 000000123456789
+phoneNumber = phoneNumber.padEnd(20, '0');
+console.log(phoneNumber); // 00000012345678900000
+
+
+// string slicing
+
+const fullName = 'Otto Cabral Nogueira';
+let firstName = fullName.slice(0, 4);
+let lastName = fullName.slice(12, 20);
+let lastChar = fullName.slice(-1);
+let negativeChar = fullName.slice(-6);
+
+console.log(firstName); // Otto
+console.log(lastName); // Nogueira
+console.log(lastChar); // a
+console.log(negativeChar);// gueira
+
+
+// ===> logical operators
+
+// AND = &&
+// OR = ||
+// NOT = !
+
+const temp = 20;
+
+if(temp > 0 && temp <= 30){
+    console.log('The weather is good'); // The weather is good
+
+}
+else{
+    console.log('The weather is bad');
+}
+
+if(temp <= 0 || temp > 30){
+    console.log('The weather is bad');
+}
+else{
+    console.log('The weather is good'); // The weather is good
+
+}
+
+
+const isSunny = true;
+
+if(!isSunny){ // if not sunny
+    console.log('It is cloudy.');
+}
+else{
+    console.log('It is sunny.'); // It is sunny.
+}
+
+
+// ===> Strict equality
+
+
+// === strict equality operator (compare if values and datatype are equal)
+// != inequality operator
+// !== strict inequality
+
+
+const PI_ = 3.14;
+
+if(PI_ == '3.14'){
+    console.log('That is PI.'); // That is PI
+}
+else{
+    console.log('That is not PI.');
+}
+
+if(PI_ === '3.14'){ // the value Pi is different from the datatype of '3.14'(which is string)
+    console.log('That is PI.'); // That is not PI
+}
+else{
+    console.log('That is not PI.');
+}
+
+if(PI_ === 3.14){
+    console.log('That is PI.'); // That is PI
+}
+else{
+    console.log('That is not PI.');
+}
