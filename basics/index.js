@@ -382,6 +382,7 @@ console.log(phoneNumber); // 00000012345678900000
 
 // string slicing
 
+
 const fullName = 'Otto Cabral Nogueira';
 let firstName = fullName.slice(0, 4);
 let lastName = fullName.slice(12, 20);
@@ -395,6 +396,7 @@ console.log(negativeChar);// gueira
 
 
 // ===> logical operators
+
 
 // AND = &&
 // OR = ||
@@ -429,7 +431,7 @@ else{
 }
 
 
-// ===> Strict equality
+// ---> Strict equality
 
 
 // === strict equality operator (compare if values and datatype are equal)
@@ -459,3 +461,210 @@ if(PI_ === 3.14){
 else{
     console.log('That is not PI.');
 }
+
+if(PI_ !== 3.14){ // are the values or the datatype different?
+    console.log('This is not pi!');
+}
+else{
+    console.log('This is pi!'); // This is pi!
+}
+
+
+// ===> WHILE LOOPS
+
+
+//let _username;
+
+//while(_username === '' || _username === null){
+//    _username = window.prompt('Enter your username');
+//}
+
+
+//do{
+//    _username = window.prompt('Enter your username')
+//}while(_username === '' || _username === null);
+
+//console.log(`Hello, ${_username}!`);
+
+let loggedIn = false;
+let _username;
+let password;
+
+//while(!loggedIn){
+//    _username = window.prompt('Enter your username');
+//    password = window.prompt('Enter your password');
+
+//    if(_username === 'myUsername' && password === 'myPassword'){
+//        loggedIn = true;
+//        console.log('You are logged in');
+//    }
+//    else{
+//        console.log('Invalid credentials! Please try again');
+//    }
+//}
+
+//do{
+//    _username = window.prompt('Enter your username');
+//    password = window.prompt('Enter your password');
+
+//    if(_username === 'myUsername' && password === 'myPassword'){
+//        loggedIn = true;
+//        console.log('You are logged in');
+//    }
+//    else{
+//        console.log('Invalid credentials! Please try again');
+//    }
+//}while(!loggedIn)
+
+
+
+// ===> FOR LOOP
+
+
+for(let i = 0; i <= 3; i++){
+    console.log(i); // 0 1 2 3
+}
+
+for(let x = 0; x <= 10; x+=2){
+    console.log(x); // 2 4 6 8 10
+}
+
+for(let y = 10; y > 0; y--){
+    console.log(y); // 10 9 8 7 6 5 4 3 2 1
+}
+
+for(let z = 10; z > 0; z-=2){
+    console.log(z); // 10 8 6 4 2
+}
+
+for(let a = 1; a <= 20; a++){
+
+    if(a == 13){
+        continue; // pulando um número
+    }
+    else{
+        console.log(a); // 1 2 3 4 5 6 7 8 9 10 11 12 14 15 16 17 18 19 20
+    }
+    
+}
+
+
+// ===> FUNCTIONS
+
+
+function happyBirthday(){
+    console.log('Happy birthday to you');
+    console.log('Happy birthday to you');
+    console.log('Happy birthday to you');
+}
+
+happyBirthday();
+// Happy birthday to you
+// Happy birthday to you
+// Happy birthday to you
+
+
+function sum(a, b){
+    console.log(a + b);
+}
+
+sum(5, 5); // 10
+
+
+function multiply(n1, n2){
+    let result_ = n1 * n2;
+    return result_
+}
+
+out = multiply(2, 2);
+console.log(out); // 4
+
+
+function isEven(num){
+    if(num % 2 === 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+console.log(isEven(6)); // true
+
+
+
+// ===> VARIABLE SCOPE = where a variable is recognized and accessible(local vs global)
+
+
+let w = 10; // global variable
+
+
+function function1(){
+    let w = 1; // local variable
+    console.log(w); // 1
+}
+
+function function2(){
+    let w = 2; // local variable
+    console.log(w); // 2
+}
+
+function function3(){
+    console.log(w); // 10
+}
+
+function3();
+
+
+
+// ===> ARRAYS = a variable like structure that can hold more than 1 value
+
+
+
+let fruits = ['apple', 'orange', 'banana'];
+
+
+console.log(fruits); // ['apple', 'orange', 'banana']
+console.log(fruits[0]); // apple
+console.log(fruits[1]); // orange
+
+fruits[0] = 'coconut';
+
+console.log(fruits[0]); // coconut
+
+fruits.push('coconut'); // add another coconut to the end of the array
+console.log(fruits); // ['coconut', 'orange', 'banana', 'coconut']
+
+fruits.pop(); // remove an item from the end of the array
+console.log(fruits); // ['coconut', 'orange', 'banana']
+
+fruits.unshift('mango'); // add mango at the start of the array
+console.log(fruits); // ['mango', 'coconut', 'orange', 'banana']
+
+fruits.shift(); // remove the first element of the array
+console.log(fruits); // ['coconut', 'orange', 'banana']
+
+let numOfFruits = fruits.length;
+let index = fruits.indexOf('orange');
+
+console.log(numOfFruits); // 3
+console.log(index); // 1
+
+for(let e = 0; e < fruits.length; e++){
+    console.log(fruits[e]); // coconut orange banana
+}
+
+fruits.sort();
+
+for(let fruit of fruits){
+    console.log(fruit); // banana coconut orange
+}
+
+
+// SPREAD OPERATORS = ... allows an iterable such as an array or string to be expanded into separate elements (unpack the elements)
+
+
+let nome = 'Cabral';
+let letters = [...nome];
+
+console.log(letters); // ['C', 'a', 'b', 'r', 'a', 'l']
