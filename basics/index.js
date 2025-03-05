@@ -275,7 +275,7 @@ else{
 
 let numero = 21;
 let message = numero >= 18 ? "You're an adult" : "You're a minor.";
-console.log(message);
+console.log(message); // you are an adult
 
 
 // ===> SWITCHES
@@ -661,10 +661,274 @@ for(let fruit of fruits){
 }
 
 
-// SPREAD OPERATORS = ... allows an iterable such as an array or string to be expanded into separate elements (unpack the elements)
+// ===> SPREAD OPERATORS = ... allows an iterable such as an array or string to be expanded into separate elements (unpack the elements)
 
 
 let nome = 'Cabral';
 let letters = [...nome];
+let letters_joined = [...nome].join('-');
 
 console.log(letters); // ['C', 'a', 'b', 'r', 'a', 'l']
+console.log(letters_joined); // C-a-b-r-a-l 
+
+
+let frutas = ['uva', 'melão', 'pera'];
+let newFruits = [...frutas];
+
+let vegetables = ['carrots', 'onions', 'lettuce']
+let foods = [...frutas, ...vegetables, 'eggs', 'milk'];
+
+console.log(newFruits); // ['uva', 'melão', 'pera'] a shallow copy
+console.log(foods); //  ['uva', 'melão', 'pera', 'carrots', 'onions', 'lettuce', 'eggs', 'milk']
+
+
+
+// ===> REST PARAMETERS = bundles separate elements into an array
+
+
+
+const food1 = 'pizza';
+const food2 = 'hamburguer';
+const food3 = 'sushi';
+const food4 = 'meat';
+
+
+function openFridge(...foods){ // accept any number of arguments
+//    console.log(foods); // ['pizza', 'hamburguer', 'sushi', 'meat']
+    console.log(...foods); // pizza hamburguer sushi meat
+}
+
+function getFood(...foods){
+    return foods;
+}
+
+openFridge(food1, food2, food3, food4);
+
+const comidas = getFood(food1, food2, food3, food4);
+console.log(comidas);
+
+
+function soma(...numbs){
+
+    let resultado = 0;
+
+    for(let numb of numbs){
+        resultado += numb;
+    }
+
+    return resultado;
+}
+
+const total = soma(5, 8, 9, 0, 5, 5);
+console.log(`Your total is ${total}`);
+
+
+function combineStrings(...strings){
+    return strings.join(' ')
+}
+
+const fullNome = combineStrings("Bob", "Esponja", "III");
+console.log(fullNome); // Bob Esponja III
+
+
+
+// ===> CALLBACK = a function that is passed as an argument to another function
+
+
+hello(goodbye);
+// Hello
+// Goodbye
+
+
+function hello(callback){
+    console.log('Hello');
+    callback();
+}
+
+function goodbye(){
+    console.log('Goodbye');
+}
+
+
+soma_(displayPage, 8, 8);
+
+
+function soma_(callback, y, x){
+    let resultado_ = x + y;
+    callback(resultado_);
+}
+
+function displayConsole(resultat){
+    console.log(resultat);
+}
+
+function displayPage(res){
+    document.getElementById('myH1').textContent = res;
+}
+
+
+
+// ===> forEach() = method used to iterate over the elements of an array and apply a specified function (callback) to each element
+// array.forEach(callback) ---> element, index and array are provided
+
+
+
+let numeros = [1, 2, 3, 4, 5];
+
+numeros.forEach(square);
+numeros.forEach(display);
+
+
+function double(_element_, index_, array){
+    array[index_] = _element_ * 2;
+}
+
+function square(_element_, index_, array){
+    array[index_] = Math.pow(_element_, 2);
+}
+
+
+function display(elemento){
+    console.log(elemento); // 1 2 3 4 5
+}
+
+
+
+// map() = accepts a callback and applies thtat function
+// to each element of an array, then return a new array
+
+
+
+const _numeros = [1, 2, 3, 4, 5];
+
+const squares = _numeros.map(raiz)
+const cubes = _numeros.map(cube);
+
+
+function raiz(elemento_){
+    return Math.pow(elemento_, 2);
+}
+
+function cube(elemento_){
+    return Math.pow(elemento_, 3);
+}
+
+console.log(squares); // [1, 4, 9, 16, 25]
+console.log(cubes); // [1, 8, 27, 64, 125]
+
+
+const students = ['spongebob', 'patric', 'squidward'];
+const studentsUpper = students.map(upperCase);
+
+console.log(studentsUpper); // ['SPONGEBOB', 'PATRIC', 'SQUIDWARD']
+
+
+function upperCase(element){
+    return element.toUpperCase();
+}
+
+
+const dates = ['2025-3-05', '2025-8-15', '2025-1-05'];
+const formattedDates = dates.map(formatDates);
+
+console.log(formattedDates); // ['05/3/2025', '15/8/2025', '05/1/2025']
+
+function formatDates(element__){
+    const parts = element__.split('-');
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+
+
+// filter() = filters lol
+
+
+
+let nmbrs = [1, 2, 3, 4, 5, 6, 7]
+
+const evenNums = nmbrs.filter(isEven);
+console.log(evenNums); // [2, 4, 6]
+
+function isEven(element){
+    return element % 2 === 0;
+}
+
+
+let words = ['ace', 'ball', 'air','oil', 'car'];
+const filtered = words.filter(removeAs);
+
+console.log(filtered); // ['ball', 'oil', 'car']
+
+
+function removeAs(element){
+    return !element.startsWith('a');
+}
+
+
+
+// ===> REDUCE = reduce the elements of an array to a single value
+
+
+
+const prices = [12, 5, 7, 32, 19];
+const total_ = prices.reduce(somar);
+
+console.log(total_);
+
+function somar(accumulator, element){
+    return accumulator + element;
+}
+
+const grades = [75, 50, 90, 80, 65, 95];
+const maximum = grades.reduce(getMax);
+const minimum = grades.reduce(getMin);
+
+console.log(maximum); // 95
+console.log(minimum); // 50
+
+function getMax(accumulator, element){
+    return Math.max(accumulator, element);
+}
+
+function getMin(accumulator, element){
+    return Math.min(accumulator, element);
+}
+
+
+
+// ===> FUNCTION EXPRESSIONS = a way to define functions as values
+//                             or variables
+
+
+
+const hello_ = function(){
+    console.log('Hello')
+}
+
+//setTimeout(function(){
+//    console.log('Hello');
+//}, 3000);
+
+const pares = nmbrs.map(function(element){
+    return element * 2;
+})
+
+console.log(pares); // [2, 4, 6, 8, 10, 12, 14]
+
+
+
+// ARROW FUNCTIONS = concise way to write function expressions;
+//                   good for simple funcions that you use only once
+//                   (parameters) => some code
+
+
+
+
+const ola_ = () => console.log('Hello');
+const ola = (name_) => console.log(`Hello, ${name_}`);
+const _ola = () => {console.log(`hello`)
+                    console.log('You are old.')
+}
+
+ola_(); // Hello
+ola('otto'); // Hello, otto
