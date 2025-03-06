@@ -917,18 +917,446 @@ console.log(pares); // [2, 4, 6, 8, 10, 12, 14]
 
 
 
-// ARROW FUNCTIONS = concise way to write function expressions;
-//                   good for simple funcions that you use only once
-//                   (parameters) => some code
+// ===> ARROW FUNCTIONS = concise way to write function expressions;
+//                        good for simple funcions that you use only once
+//                        (parameters) => some code
 
 
 
 
 const ola_ = () => console.log('Hello');
 const ola = (name_) => console.log(`Hello, ${name_}`);
-const _ola = () => {console.log(`hello`)
-                    console.log('You are old.')
-}
+const _ola = (name, age) => {console.log(`Olá, ${name}`)
+                             console.log(`Você tem ${age} anos`)};
 
 ola_(); // Hello
 ola('otto'); // Hello, otto
+_ola('otto', 25); // Olá, otto Você tem 25 anos
+
+
+//setTimeout( () => console.log('Hello'), 3000);
+
+const nmbrs_ = [1, 2, 3, 4, 5, 6];
+
+const sqrst = nmbrs_.map((element) => Math.pow(element, 2));
+const cubos = nmbrs_.map((element) => Math.pow(element, 3));
+const pares_ = nmbrs_.filter((element) => element % 2 === 0);
+const soma__ = nmbrs_.reduce((accumulator, element) => accumulator + element);
+
+console.log(sqrst); // [1, 4, 9, 16, 25, 36]
+console.log(cubos); // [1, 8, 27, 64, 125, 216]
+console.log(pares_); // [2, 4, 6]
+console.log(soma__); // 21
+
+
+
+// ===> OBJECT = A collection of related properties an/or methods
+//               Can represent real world objects(products,places,people)
+//               object = {key: value,
+//                         function()}
+
+
+
+const person = {
+    firstName_: 'SpongeBob',
+    lastName_: 'Squarepants',
+    age: 30,
+    isEmployed: true,
+    sayHello: function(){console.log('Hi, I am Spongebob!')},
+    eat: function(){console.log('I am eating a krabby patty')},
+}
+
+
+const person2 = {
+    firstName_: 'Patrick',
+    lastName_: 'Star',
+    age: 25,
+    isEmployed: false,
+    sayHello: () => console.log('Hi, I am Patrick...'), // using arrow functions
+    eat: function(){console.log('I am eating a jelly jam')}, // function expression
+}
+
+
+console.log(person.firstName_); // SpongeBob
+console.log(person.lastName_); // Squarepants
+console.log(person.isEmployed); // true
+person.sayHello(); // Hi, I am Spongebob!
+person.eat();
+
+console.log(person2.firstName_); // Patrick
+person2.sayHello(); // Hi, I am Patrick...
+person2.eat(); // I am eating a jelly jam
+
+
+
+// THIS = reference to the object where THIS is used
+//        (the object depends on the imediate context)
+//        person.name = this.name
+//        does not work with arrow functions
+
+
+
+const pessoa1 = {
+    nom: 'Spongebob',
+    favoriteFood_: 'Hamburgers',
+    dizerOi: function(){console.log(`Hi, I am ${this.nom}`)}, //just put 'non' does not work
+    eat: function(){console.log(`${this.nom} is eating ${this.favoriteFood_}`)}
+}
+
+pessoa1.dizerOi(); // Hi, I am Spongebob
+pessoa1.eat(); // Spongebob is eating Hamburgers
+
+
+
+// ===> CONSTRUCTOR = special method for defining the 
+//                    properties and methods of objects
+
+
+
+function Car(make, model, year, color){
+    this.make = make,
+    this.model = model,
+    this.year = year,
+    this.color = color,
+    this.drive = function(){console.log(`You drive the ${this.model}`)}
+}
+
+const car1 = new Car('ford', 'mustang', 2025, 'red');
+const car2 = new Car('byd', 'dolphin', 2025, 'blue');
+
+console.log(car1.model); // mustang
+console.log(car1.color); // red
+
+console.log(car2.model); // dolphin
+console.log(car2.color); // blue
+console.log(car2.year); // 2025
+car1.drive(); // You drive the mustang
+car2.drive(); // You drive the dolphin
+
+
+
+// ===> CLASS
+
+
+
+class Product{
+    constructor(name, price){
+        this.name = name;
+        this.price = price;
+    }
+
+    displayProduct(){
+        console.log(`Product: ${this.name}`);
+        console.log(`Price: R$${this.price.toFixed(2)}`);
+    }
+
+    calculateTotal(salesTax){
+        return this.price + (this.price * salesTax);
+    }
+}
+
+const salestax = 0.05;
+
+const product1 = new Product('shirt', 99.99);
+const product2 = new Product('pants', 22.99);
+
+product1.displayProduct(); // Product: shirt  Price: R$99.99
+product2.displayProduct(); // Product: pants  Price: R$22.99
+
+const tot_ = product1.calculateTotal(salestax);
+console.log(`R$${tot_.toFixed(2)}`); // R$104.99
+
+
+
+// STATIC = keyword that defines properties or methods that belong
+//          to a class itself rather than the objects created
+//          from that class (class owns anything static not thhe objects)
+
+
+
+class MathUtil{
+    static _PI = 3.14159;
+
+    static getDiameter(radius){
+        return radius * 2;
+    }
+
+    static getCircumference(radius){
+        return 2 * this._PI * radius;
+    }
+}
+
+console.log(MathUtil._PI); // 3.14159
+console.log(MathUtil.getDiameter(10)); // 20
+console.log(MathUtil.getCircumference(5)); // 31.4159
+
+
+class User{
+    static userCount = 0; // belongs only to the class
+
+    constructor(username){
+        this.username = username;
+        User.userCount++;
+    }
+
+    static getuserCount(){
+        console.log(`There are ${User.userCount} users online`);
+    }
+
+    sayHello(){
+        console.log(`Hello, my username is ${this.username}`)
+    }
+}
+
+const user1 = new User('Spongebob');
+const user2 = new User('Patrick');
+const user3 = new User('Sandy');
+
+console.log(user1.username); // Spongebob
+console.log(User.userCount); // 3
+
+user1.sayHello(); // Hello, my username is Spongebob
+user2.sayHello(); // Hello, my username is Patrick
+user3.sayHello(); // Hello, my username is Sandy
+
+User.getuserCount(); // There are 3 users online
+
+
+
+// INHERITANCE
+
+
+
+class Animal{ // parent class or superclass
+    alive = true;
+
+    eat(){
+        console.log(`This ${this.name} is eating.`);
+    }
+    sleep(){
+        console.log(`This ${this.name} is sleeping.`);
+    }
+}
+
+class Rabbit extends Animal{ // child class or subclass
+    name = 'rabbit';
+
+    run(){
+        console.log(`This ${this.name} is running.`)
+    }
+}
+
+class Fish extends Animal{
+    name = 'fish';
+
+    swim(){
+        console.log(`This ${this.name} is swimming.`)
+    }
+}
+
+class Hawk extends Animal{
+    name = 'hawk';
+
+    fly(){
+        console.log(`This ${this.name} is flying.`)
+    }
+}
+
+const rabbit = new Rabbit();
+const fish = new Fish();
+const hawk = new Hawk();
+
+rabbit.alive = false;
+
+console.log(rabbit.alive); // false
+console.log(rabbit.name); // rabbit
+
+hawk.eat(); // This hawk is eating.
+hawk.sleep(); // This hawk is sleeping.
+hawk.fly(); // This hawk is flying.
+
+fish.swim(); // This fish is swimming.
+// fish.run(); // erro
+
+
+
+// SUPER = access the properties and methods of a parent
+//         this = this object
+//         super = the parent
+
+
+
+class Animal_{
+    constructor(nome, idade){
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    move(speed){
+        console.log(`The ${this.nome} moves at a speed of ${speed}km/h`)
+    }
+}
+
+class Coelho extends Animal_{
+
+    constructor(nome, idade, velCorrida){
+        super(nome, idade);
+        this.velCorrida = velCorrida;
+    }
+
+    run(){
+        console.log(`This ${this.nome} can run`);
+        super.move(this.velCorrida); // use the parent's move method
+    }
+}
+
+class Peixe extends Animal_{
+    
+    constructor(nome, idade, velNado){
+        super(nome, idade);
+        this.velNado = velNado;
+    }
+
+    swim(){
+        console.log(`This ${this.nome} can swim`);
+        super.move(this.velNado);
+    }
+}
+
+
+class Aguia extends Animal_{
+    
+    constructor(nome, idade, velVoo){
+        super(nome, idade);
+        this.velVoo = velVoo;
+    }
+
+    fly(){
+        console.log(`This ${this.nome} can fly`);
+        super.move(this.velVoo);
+    }
+}
+
+const coelho = new Coelho('bunny', 1, 25);
+const peixe = new Peixe('fish', 2, 15);
+const aguia = new Aguia('hawk', 5, 35)
+
+console.log(coelho.nome); // bunny
+console.log(coelho.velCorrida); // 25
+console.log(coelho.idade); // 1
+
+console.log(peixe.velNado); // 15
+console.log(aguia.velVoo); // 35
+
+coelho.run(); // This bunny can run 
+// The bunny moves at a speed of 25km/h
+peixe.swim(); // This fish can swim
+// The fish moves at a speed of 15km/h
+aguia.fly(); // This hawk can fly
+// The hawk moves at a speed of 35km/h
+
+
+
+// ===> GETTERS AND SETTERS
+
+// getter = special method that makes a property readable
+// setter = special method that makes property writeable
+// validate and modify a value when reading/writing a property
+
+
+
+class Rectangle{
+
+    constructor(width, height){
+        this.width = width;
+        this.height = height;
+    }
+
+    set width(newWidth){
+        if(newWidth > 0){
+            this._width = newWidth
+        }
+        else{
+            console.error('Width must be a positive number');
+        }
+    }
+
+    set height(newHeight){
+        if(newHeight > 0){
+            this._height = newHeight
+        }
+        else{
+            console.error('Height must be a positive number');
+        }
+    }
+
+    get width(){
+        return this._width;
+    }
+
+    get height(){
+        return this._height;
+    }
+
+    get area(){
+        return (this._width * this._height).toFixed(1);
+    }
+}
+
+const rectangle = new Rectangle(3, 4);
+const rectangle2 = new Rectangle(-888888, 'pizza')
+
+rectangle.width = 5;
+rectangle.height = 6;
+
+console.log(rectangle.width); // 5
+console.log(rectangle.height); // 6
+console.log(rectangle2.width); // Width must be a positive number
+console.log(rectangle2.height); // Height must be a positive number
+
+console.log(rectangle.area); // 30.0
+
+
+class Pessoa{
+
+    constructor(firstNome, lastName, age){
+        this.firstNome = firstNome;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    set firstNome(newFirstNome){
+        if(typeof(newFirstNome) === 'string' && newFirstNome.length > 0){
+            this._firstNome = newFirstNome;
+        }
+        else{
+            console.error('First name must be a non-empty string')
+        }
+    }
+
+    set lastName(newLastName){
+        if(typeof(newLastName) === 'string' && newLastName.length > 0){
+            this._lastName = newLastName;
+        }
+        else{
+            console.error('Last name must be a non-empty string')
+        }
+    }
+
+    set age(newAge){
+        if(typeof(newAge) === 'number' && newAge >= 0){
+            this._age = newAge;
+        }
+        else{
+            console.error('Age must be a non-negative number')
+        }
+    }
+
+    get(){
+        
+    }
+}
+
+const person_ = new Pessoa(767, 78, 'pizza')
+
+console.log(person_.firstNome);
