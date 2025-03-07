@@ -270,11 +270,11 @@ else{
 }
 
 
-// ===> ternary operator
+// ===> TERNARY OPERATOR
 
 
 let numero = 21;
-let message = numero >= 18 ? "You're an adult" : "You're a minor.";
+let message = numero >= 18 ? "You're an adult" : "You're a minor."; // se numero > 18 return "You're an adult" else return "You're a minor."
 console.log(message); // you are an adult
 
 
@@ -1339,7 +1339,7 @@ class Pessoa{
             this._lastName = newLastName;
         }
         else{
-            console.error('Last name must be a non-empty string')
+            console.error('Last name must be a non-empty string');
         }
     }
 
@@ -1348,15 +1348,365 @@ class Pessoa{
             this._age = newAge;
         }
         else{
-            console.error('Age must be a non-negative number')
+            console.error('Age must be a non-negative number');
         }
     }
 
-    get(){
-        
+    get firstNome(){
+        return this._firstNome;
+    }
+
+    get lastName(){
+        return this._lastName;
+    }
+
+    get fullName(){
+        return this._firstNome + ' ' + this.lastName;
     }
 }
 
-const person_ = new Pessoa(767, 78, 'pizza')
+const person_ = new Pessoa('otto', 'cabral', 8);
 
+console.log(person_.lastName);
 console.log(person_.firstNome);
+console.log(person_.age);
+console.log(person_.fullName);
+
+
+
+// DESTRUCTURING = extracts value from arrays and objects
+//                 then assign them to variables in a
+//                 convenient way
+//                 [] = to perform array destructuring
+//                 {} = to perform object destructuring
+
+
+
+let a_ = 1;
+let b_ = 2;
+
+[a_, b_] = [b_, a_];
+
+console.log(a_); // 2
+console.log(b_); // 1
+
+
+const colors = ['red', 'green', 'blue', 'black', 'white'];
+
+[colors[0], colors[3]] = [colors[3], colors[0]];
+
+console.log(colors); // ['black', 'green', 'blue', 'red', 'white']
+
+
+const [firstColor, secondColor, thirdColor, ...extraColors] = colors;
+
+console.log(firstColor); // black
+console.log(secondColor); // green
+console.log(thirdColor); // blue
+console.log(extraColors); // ['red', 'white']
+
+
+const person1_ = {
+    primeiroNome_: 'Spongebob',
+    lastName: 'Squarepants',
+    idade_: 30,
+    job: 'Fry cook',
+}
+
+const person2_ = {
+    primeNome_: 'Patrick',
+    ULTName_: 'Star',
+    idade_: 34,
+}
+
+const {primeiroNome_, lastName_, idade_, job} = person1_;
+const {primeNome_, ULTName_, _idade_, _job="Unemployed"} = person2_;
+
+console.log(primeiroNome_); // Spongebob
+console.log(idade_); // 30
+console.log(job); // Fry cook
+
+console.log(ULTName_); // Star
+console.log(primeNome_); // Patrick
+console.log(_job); // Unemployed
+
+
+function displayPerson({primeiroNome_, lastName, idade_, job}){
+    console.log(`name: ${primeiroNome_} ${lastName}`);
+    console.log(`idade: ${idade_}`);
+    console.log(`job: ${job}`);
+}
+
+displayPerson(person1_);
+
+
+
+// NESTED OBJECTS 
+
+
+
+const alguem = {
+    nomeLegal: 'Alice Cabral',
+    ciclosSolares: 30,
+    eEstudante: true,
+    hobbies: ['reading', 'exercising', 'cooking'],
+    address: {
+        rua: 'Rua Anador',
+        cidade: 'Manaus',
+        pais: 'Brasil'
+    }
+}
+
+console.log(alguem.nomeLegal); // Alice Cabral
+console.log(alguem.ciclosSolares); // 30
+console.log(alguem.eEstudante); // true
+console.log(alguem.hobbies); // ['reading', 'exercising', 'cooking']
+console.log(alguem.address.rua); // Rua Anador
+console.log(alguem.address.cidade); // Manaus
+console.log(alguem.address.pais); // Brasil
+//console.log(alguem.hobbies[0]); // reading
+
+for(property in alguem.address.value){
+    console.log(alguem[property]); // Rua Anador Manaus Brasil
+}
+
+
+class Person{
+
+    constructor(nickname, ciclos, ...endereco){
+        this.nickname = nickname;
+        this.ciclos = ciclos;
+        this.endereco = new Endereco(...endereco);
+    }
+}
+
+
+class Endereco{
+
+    constructor(logradouro, unidadeMunicipal, country){
+        this.logradouro = logradouro;
+        this.unidadeMunicipal = unidadeMunicipal;
+        this.country = country;
+    }
+}
+
+
+const individuo1 = new Person('tulio', 25, '180 Anador street', 'Manaus', 'Brasil');
+const individuo2 = new Person('ana', 19, '666 shitty street', 'xique-xique', 'Brasil');
+const individuo3 = new Person('alice', 43, '69 tree street', 'tokyo', 'Japan');
+
+console.log(individuo1.nickname); // tulio
+console.log(individuo1.ciclos); // 25
+console.log(individuo1.endereco.logradouro); // 180 Anador street
+console.log(individuo1.endereco.unidadeMunicipal); // Manaus
+
+
+
+// ARRAYS OF OBJECTS
+
+
+
+const frutas_ = [{chamada: 'uva', cor: 'roxo', calorias: 95},
+     {chamada: 'orange', cor: 'orange', calorias: 45},
+      {chamada: 'banana', cor: 'yellow', calorias: 105},
+       {chamada: 'coconut', cor: 'white', calorias: 159},
+        {chamada: 'pineapple', cor: 'yellow', calorias: 37}];
+
+
+
+console.log(frutas_[4].chamada); // pineapple
+console.log(frutas_[4].calorias); // 37
+console.log(frutas_[4].cor); // yellow
+
+frutas_.push({chamada: 'watermelon', cor: 'green', calorias: 95})
+
+console.log(frutas_);
+// [{chamada: 'uva', cor: 'roxo', calorias: 95},
+// {chamada: 'orange', cor: 'orange', calorias: 45},
+// {chamada: 'banana', cor: 'yellow', calorias: 105},
+// {chamada: 'coconut', cor: 'white', calorias: 159},
+// {chamada: 'pineapple', cor: 'yellow', calorias: 37},
+// {chamada: 'watermelon', cor: 'green', calorias: 95}]; 
+
+frutas_.pop()
+
+console.log(frutas_);
+// [{chamada: 'uva', cor: 'roxo', calorias: 95},
+// {chamada: 'orange', cor: 'orange', calorias: 45},
+// {chamada: 'banana', cor: 'yellow', calorias: 105},
+// {chamada: 'coconut', cor: 'white', calorias: 159},
+// {chamada: 'pineapple', cor: 'yellow', calorias: 37}]
+
+frutas_.splice(1, 2); // remove elements at certain indices
+
+console.log(frutas_);
+// [{chamada: 'uva', cor: 'roxo', calorias: 95},
+// {chamada: 'coconut', cor: 'white', calorias: 159},
+// {chamada: 'pineapple', cor: 'yellow', calorias: 37}]
+
+frutas_.forEach(fruta => console.log(fruta.chamada)); // uva coconut pineapple
+frutas_.forEach(fruta => console.log(fruta.cor)); // roxo white yellow
+
+const fruitNames = frutas_.map(fruit => fruit.chamada);
+const fruitColors = frutas_.map(fruta => fruta.cor);
+
+console.log(fruitNames); // ['uva', 'coconut', 'pineapple']
+console.log(fruitColors); // ['roxo', 'white', 'yellow']
+
+const yellowFruits = frutas_.filter(fruta => fruta.cor === 'yellow');
+
+console.log(yellowFruits); // {chamada: 'pineapple', cor: 'yellow', calorias: 37}
+
+const maxFruit = frutas_.reduce((max, fruit) => 
+    fruit.calorias > max.calorias ? fruit : max); // se fruit.calorias > max.calorias return fruit else return max
+
+console.log(maxFruit); // {chamada: 'coconut', cor: 'white', calorias: 159}
+
+
+
+// ===> SORT
+//      sorts elements as strings in lexicographic order, not alphabetical
+//      lexicographic = (alphabet + numbers + symbols) as strings
+
+
+
+let countries = ['japan', 'china', 'albania', 'zimbabwe'];
+let even = [1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
+
+countries.sort();
+console.log(countries); // ['albania', 'china', 'japan', 'zimbabwe']
+
+even.sort((A, B) => A - B); // REVERSE: B - A
+console.log(even); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+const persona = [{nomeSocial: 'otto', peso: 80, altura: 1.85},
+    {nomeSocial: 'celia', peso: 86, altura: 1.65},
+    {nomeSocial: 'renata', peso: 70, altura: 1.75},
+    {nomeSocial: 'suzana', peso: 89, altura: 1.85}]
+
+//persona.sort((a1, a2) => a2.peso - a1.peso); // reverse order
+
+//console.log(persona);
+// {nomeSocial: 'suzana', peso: 89, altura: 1.85}
+// {nomeSocial: 'celia', peso: 86, altura: 1.65}
+// {nomeSocial: 'otto', peso: 80, altura: 1.85}
+// {nomeSocial: 'renata', peso: 70, altura: 1.75}
+
+persona.sort((b1, b2) => b1.nomeSocial.localeCompare(b2.nomeSocial)); // pra garantir que strings estejam na ordem certa
+
+console.log(persona);
+// {nomeSocial: 'otto', peso: 80, altura: 1.85}
+// {nomeSocial: 'celia', peso: 86, altura: 1.65}
+// {nomeSocial: 'renata', peso: 70, altura: 1.75}
+// {nomeSocial: 'suzana', peso: 89, altura: 1.85}
+
+
+
+// ===> Date objects
+
+
+
+const date = new Date();
+
+console.log(date);
+// Fri Mar 07 2025 13:48:27 GMT-0400 (Horário Padrão do Amazonas)
+
+const data = new Date(2025, 2, 7, 1, 51, 3, 7); // 0 => january
+console.log(data); // Fri Mar 07 2025 01:51:03 GMT-0400 (Horário Padrão do Amazonas)
+
+const date_ = new Date('2025-01-02T12:00:00Z')
+console.log(date_); // Thu Jan 02 2025 08:00:00 GMT-0400 (Horário Padrão do Amazonas)
+
+const year = date.getFullYear();
+const month = date.getMonth();
+const day_ = date.getDate(); // not Day()
+const hour = date.getHours();
+const dayOfWeek = date.getDay();
+
+console.log(year); // 2025
+console.log(month); // 2
+console.log(day_); // 7
+console.log(hour); // 14
+console.log(dayOfWeek); // 5 (friday)
+
+date.setFullYear(2026);
+date.setMonth(0);
+date.setDate(1);
+date.setHours(2);
+date.setMinutes(3);
+date.setSeconds(30);
+
+console.log(date); // Thu Jan 01 2026 02:03:30 GMT-0400 (Horário Padrão do Amazonas)
+
+
+
+// ===> CLOSURE = a function defined inside of another function,
+//               Allow for private variables and state maintenance
+
+
+
+function outer(){
+
+    let messagem = 'Hello'; // private variable
+    function inner(){
+        console.log(messagem);
+    }
+
+    inner();
+}
+
+outer(); // hello
+
+function createCounter(){
+
+    let contador  = 0;
+
+    function increment(){
+        contador++;
+        console.log(`Count increased to ${contador}`);
+    }
+
+    function getCount(){
+        return contador;
+    }
+
+    return {increment, getCount}
+}
+
+const counter = createCounter();
+
+counter.increment(); // Count increased to 1
+counter.increment(); // Count increased to 2
+counter.increment(); // Count increased to 3
+counter.increment(); // Count increased to 4
+console.log(`The current count is ${counter.getCount()}`); // The current count is 4
+
+
+function createGame(){
+
+    let score = 0;
+
+    function increaseScore(points){
+        score += points;
+        console.log(`+${score}pts`);
+    }
+
+    function decreaseScore(points){
+        score -= points;
+        console.log(`-${score}pts`);
+    }
+
+    function getScore(){
+        return score;
+    }
+
+    return {increaseScore, decreaseScore, getScore}
+}
+
+const game = createGame();
+
+game.increaseScore(5); // +5pts
+game.increaseScore(6); // +11pts
+game.decreaseScore(3); // -8pts
+console.log(`The final score is ${game.getScore()}pts`); // The final score is 8pts
