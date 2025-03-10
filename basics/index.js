@@ -576,8 +576,8 @@ function multiply(n1, n2){
     return result_
 }
 
-out = multiply(2, 2);
-console.log(out); // 4
+//out = multiply(2, 2);
+//console.log(out); // 4
 
 
 function isEven(num){
@@ -846,10 +846,10 @@ function formatDates(element__){
 
 let nmbrs = [1, 2, 3, 4, 5, 6, 7]
 
-const evenNums = nmbrs.filter(isEven);
+const evenNums = nmbrs.filter(isEven_);
 console.log(evenNums); // [2, 4, 6]
 
-function isEven(element){
+function isEven_(element){
     return element % 2 === 0;
 }
 
@@ -1710,3 +1710,231 @@ game.increaseScore(5); // +5pts
 game.increaseScore(6); // +11pts
 game.decreaseScore(3); // -8pts
 console.log(`The final score is ${game.getScore()}pts`); // The final score is 8pts
+
+
+
+
+// setTimeout() = allows to schedule the execution of a function
+//                after an amount of time(miliseconds)
+//                setTimeout(callback, delay)
+
+
+
+const bonjour_ = () => window.alert('Hello')
+
+// setTimeout(bonjour_, 3000)
+
+const timeoutId = setTimeout(() => window.alert('Hello'), 3000);
+
+clearTimeout(timeoutId); // cancels the timeout function
+
+let timeoutId_;
+
+function startTimer(){
+    timeoutId_ = setTimeout(() => window.alert('Hello'), 3000);
+    console.log('STARTEd');
+}
+
+function clearTimer(){
+    clearTimeout(timeoutId_);
+    console.log('CLEARED');
+}
+
+
+
+// ===> ES6 Module
+
+
+
+import {_PI_, getCircumference, getArea, getVolume} from './mathUtil.js';
+
+console.log(_PI_);
+
+const _circumference = getCircumference(5);
+const _area = getArea(10);
+const volume = getVolume(10);
+
+console.log(_circumference); // 31.4159
+console.log(`${_area.toFixed(2)}cm^2`);
+console.log(`${_circumference.toFixed(2)}cm^3`);
+
+
+
+// ===> Synchronous = executes line by line consecutevely
+// in a sequential manner, it waits for an operation to complete
+
+
+// Asynchronous = Allows multiple operations to be perfomed
+// concurrently without waiting, Doesn't block the operation 
+// flow and allows the program to continue
+
+
+function func1(callback_){
+    setTimeout(() => {console.log('task 1');
+                callback_()}, 3000);
+}
+
+function func2(){
+    console.log('task 2');
+    console.log('task 3');
+    console.log('task 4');
+}
+
+
+//func1(func2);
+
+
+
+// Error = an object that is created to represent a
+// problem that occurs
+// Occur often with user input or establishing a connection
+
+
+
+try{
+    console.log(cf);
+}
+catch(error){
+    console.error(error);
+}
+finally{
+
+    console.log('This always executes');
+}
+
+console.log('You have reached the end');
+
+
+try{
+//    const dividend = Number(window.prompt('Enter a dividend: '));
+//    const divisor = Number(window.prompt('Enter a divisor: '));
+
+    if(divisor == 0){
+        throw new Error("You can't divide by zero");
+    }
+    if(isNaN(dividend) || isNaN(divisor)){
+        throw new Error("Values must a number");
+    }
+
+    const produto = dividend / divisor;
+    console.lag(produto);
+}
+catch(error){
+    console.error(error);
+}
+
+console.log('You have reached the end')
+
+
+
+// DOM = Document Object Model
+//       Object{} that represents the page you see in the web browser
+//       and provides you with an API to interact with.
+//       Web browser constructs the DOM when it loads an 
+//       HTML document, and structures all the elements in
+//       tree-like representation. Javascript can access
+//       the DOM to dynamically change the content, structure
+//       and style of a web page
+
+
+
+
+document.title = 'My website!'
+document.body.style.backgroundColor = 'hsl(0, 0%, 50%)';
+
+console.dir(document);
+
+
+
+// Element selectors = Methods used to target and manipulate
+//                    HTML elements
+// 1. document.getElementById()       // ELEMENT OR NULL
+// 2. document.getElementsClassName() // HTML COLLECTION
+// 3. document.getElementsByTagName() // HTML COLLECTION
+// 4. document.querySelector()        // FIRST ELEMENT OR NULL
+// 5. document.querySelectorAll()     // NODELIST
+
+
+
+const myHeading = document.getElementById('my-heading');
+myHeading.style.backgroundColor = 'yellow';
+myHeading.style.textAlign = 'center';
+
+console.log(myHeading);
+
+
+const fruits_ = document.getElementsByClassName('fruits');
+//fruits_[2].style.backgroundColor = 'yellow'
+
+for(let fruit of fruits_){
+    fruit.style.backgroundColor = 'yellow'
+}
+
+Array.from(fruits_).forEach(fruit => {
+    fruit.style.backgroundColor = 'green';
+});
+
+console.log(fruits_)
+
+
+const h4Elements = document.getElementsByTagName('h4');
+const liElements = document.getElementsByTagName('li');
+const _element = document.querySelector(".fruits"); // only returns a single element
+const _fruits = document.querySelectorAll('li');
+const foods_ = document.querySelectorAll('.fruits');
+
+// h4Elements[0].style.backgroundColor = 'green';
+
+for(let element of h4Elements){
+    element.style.backgroundColor = 'red';
+}
+
+
+for(let li of liElements){
+    li.style.backgroundColor = 'blue';
+}
+
+Array.from(liElements).forEach(element => {
+    element.style.backgroundColor = 'lightgreen';
+})
+
+console.log(h4Elements);
+
+
+_element.style.backgroundColor = 'yellow';
+
+
+_fruits[3].style.backgroundColor = 'pink';
+foods_[2].style.backgroundColor = 'orange';
+foods_.forEach(food => {
+    food.style.backgroundColor = 'yellow';
+})
+
+console.log(foods_);
+
+
+
+// DOM Navigation = The process of naviating through the
+//                  structure of an HTML document using js.
+
+// .firstElementChild
+// .lastElementChild
+// .nextElementSibling
+// .previousElementSibling
+// .parentElement
+// .children
+
+
+
+// -------------.firstElementChild--------------------
+
+const element__ = document.getElementById('comidas');
+const ulElements = document.querySelectorAll('ul');
+
+const firstChild = element__.firstElementChild;
+firstChild.style.backgroundColor = 'purple';
+
+ulElements.forEach(ulelement => {
+    const primeiraCrianca = ulelement.firstElementChild;
+    primeiraCrianca.style.backgroundColor = 'purple';
+})
