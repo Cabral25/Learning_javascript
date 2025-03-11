@@ -1938,3 +1938,292 @@ ulElements.forEach(ulelement => {
     const primeiraCrianca = ulelement.firstElementChild;
     primeiraCrianca.style.backgroundColor = 'purple';
 })
+
+// -------------.lastElementChild----------------------
+
+const variavel = document.getElementById('sobremesas');
+const lastChild = variavel.lastElementChild;
+lastChild.style.backgroundColor = 'pink';
+
+const elementsUl = document.querySelectorAll('ul');
+
+elementsUl.forEach(element => {
+    const lastElements = element.lastElementChild;
+    lastElements.style.backgroundColor = 'yellow';
+})
+
+// --------------.nextElementSibling---------------------
+
+const elementId = document.getElementById('comidas');
+const nextSibling = elementId.nextElementSibling;
+nextSibling.style.backgroundColor = 'orange';
+
+// -------------.previousElementSibling-------------------
+
+const __element = document.getElementById('laranja');
+const previousSibling = __element.previousElementSibling;
+previousSibling.style.backgroundColor = 'red';
+
+// --------------.parentElement----------------------------
+
+const _elemento = document.getElementById('milkshake');
+const parent = _elemento.parentElement;
+parent.style.backgroundColor = 'lime';
+
+// -----------------.children-----------------------------
+
+const elemento__ = document.getElementById('bebidas');
+const children = elemento__.children; // returns an HTML collection
+
+Array.from(children).forEach(child => {
+    child.style.backgroundColor = 'red';
+});
+
+
+
+// Add & change HTML elements
+
+
+
+// ------------ EXAMPLE 1 <h1> -------------------
+
+const newH1 = document.createElement('h1');
+
+newH1.textContent = 'i like pizza';
+newH1.id = 'myH1_';
+newH1.style.color = 'tomato';
+newH1.style.textAlign = 'center';
+
+document.body.append(newH1); // adds it to the bottom
+// document.body.prepend(newH1);// adds it to the top
+document.getElementById('box1').append(newH1); // makes newH1 the last child of box1, since there is already a <p> element in it
+// document.getElementById('box1').prepend(newH1); // makes newH1 the first child
+
+const box2 = document.getElementById('box2');
+// document.body.insertBefore(newH1, box2); // inserindo newH1 antes de box2
+
+const boxes = document.querySelectorAll('.box'); // nodelist to selec many elements
+// document.body.insertBefore(newH1, boxes[1]);
+
+// document.body.removeChild(newH1); // remove um elemento HTML do corpo(body)
+document.getElementById('box1').removeChild(newH1); // remove uma das crianças de box1(parent)
+
+// ------------------ EXAMPLE 2 <li> ------------------------
+
+const newListItem = document.createElement('li');
+const carambola = document.getElementById('star-fruit');
+
+newListItem.textContent = 'coconut';
+newListItem.id = 'coconut';
+newListItem.style.fontWeight = 'bold';
+newListItem.style.backgroundColor = 'tomato'
+
+// document.body.append(newListItem);
+// document.body.prepend(newListItem);
+// document.getElementById('frutas_').prepend(newListItem); // makes it the first child of frutas_
+document.getElementById('frutas_').append(newListItem); // makes it the last child
+// document.getElementById('frutas_').insertBefore(newListItem, carambola); // coconut is now number 2
+
+const listItems = document.querySelectorAll('#frutas_ li'); // returns a node list of all <li> elements
+
+// document.getElementById('frutas_').insertBefore(newListItem, listItems[0]);
+
+document.getElementById('frutas_').removeChild(newListItem); // removendo uma criança da lista ordenada
+
+
+
+// ===> MOUSE EVENTS
+
+
+
+// eventListener = Listen for especific events to create interactive
+//                 web pages
+//                 events: click, mouseover, mouseout
+//                 .addEventListener(event, callback)
+
+
+const myBox = document.getElementById('myBox');
+
+//function changeColor(event){ // event is provided to us by the browser
+//    event.target.style.backgroundColor = 'yellow';
+//    event.target.textContent = 'OUCH! :('
+//}
+
+myBox.addEventListener('click', event => {
+    event.target.style.backgroundColor = 'yellow';
+    event.target.textContent = 'OUCH! :(';
+});
+
+myBox.addEventListener('mouseover', event => {
+    event.target.style.backgroundColor = 'red';
+    event.target.textContent = 'Do not do it!';
+});
+
+myBox.addEventListener('mouseout', event => {
+    event.target.style.backgroundColor = 'lightgreen';
+    event.target.textContent = 'Click me :)';
+});
+
+const myyButton = document.getElementById('myButton');
+const myOtherBox = document.getElementById('myOtherBox');
+
+myyButton.addEventListener('click', event => {
+    myOtherBox.textContent = 'You clicked me :(';
+    myOtherBox.style.backgroundColor = 'red';
+})
+
+myyButton.addEventListener('mouseover', event => {
+    myOtherBox.style.backgroundColor = 'yellow';
+    myOtherBox.textContent = 'Do not do it!'
+})
+
+myyButton.addEventListener('mouseout', event => {
+    myOtherBox.textContent = 'Click me';
+    myOtherBox.style.backgroundColor = 'lightgreen';
+})
+
+
+
+// ===> KEY EVENTS
+
+
+
+//                 events: keydown, keyup
+//                 document.addEventListener(event, callback)
+
+const minhaCaixa = document.getElementById('minhaCaixa');
+const moveAmount = 15;
+let x__ = 0;
+let y__ = 0;
+
+document.addEventListener('keydown', event => {
+    minhaCaixa.textContent = 'o7';
+    minhaCaixa.style.backgroundColor = 'yellow'
+});
+
+document.addEventListener('keyup', event => {
+    minhaCaixa.textContent = 'o/';
+    minhaCaixa.style.backgroundColor = 'lightblue';
+});
+
+document.addEventListener('keydown', event => {
+    if(event.key.startsWith('Arrow')){
+
+        event.preventDefault();
+
+        switch(event.key){
+            case "ArrowUp":
+                y__ -= moveAmount;
+                break;
+            case "ArrowDown":
+                y__ += moveAmount;
+                break;
+            case "ArrowLeft":
+                x__ -= moveAmount;
+                break;
+            case "ArrowRight":
+                x__ += moveAmount;
+                break;
+        }
+        
+//       minhaCaixa.style.top = `${y__}px`;
+//        minhaCaixa.style.left = `${x__}px`;
+    }
+})
+
+const botao = document.getElementById('meuBotao');
+const imagem = document.getElementById('myImg');
+
+botao.addEventListener('click', event => {
+
+    if(imagem.style.display === 'none'){
+        imagem.style.display = 'block';
+        botao.textContent = 'Hide';
+    }
+    else{
+        imagem.style.display = 'none';
+        botao.textContent = 'Show';
+    }
+    
+});
+
+
+
+// NodeLists = Static collection of HTML elements by(id, class, element)
+//            Can be created by using querySelectorAll()
+//            Similar to an array, but no (map, filter, reduce)
+//            NodeLists won't update to automatically reflect changes
+
+let buttons = document.querySelectorAll('.myButtons');
+
+// Add HTML/CSS properties
+
+buttons.forEach(button => {
+//    button.style.backgroundColor = 'red';
+    button.textContent += ' :)';
+});
+
+// CLICK event listener
+
+buttons.forEach(botao => {
+    botao.addEventListener('click', event => {
+        event.target.style.backgroundColor = 'green';
+    })
+});
+
+// MOUSEOVER + MOUSEOUT event listener
+
+buttons.forEach(button => {
+    button.addEventListener('mouseover', event => {
+        event.target.style.backgroundColor = 'hsl(205, 100%, 40%)';
+    })
+});
+
+buttons.forEach(button => {
+    button.addEventListener('mouseout', event => {
+        event.target.style.backgroundColor = 'hsl(205, 100%, 60%)';
+    })
+});
+
+// ADD AN ELEMENT
+
+const newButton = document.createElement('button');
+
+newButton.textContent = 'Button 5 :)';
+newButton.classList = 'myButtons'; // assigning an ID to the new button
+
+document.body.append(newButton);
+
+buttons = document.querySelectorAll('.myButtons'); // adding newButton to the nodeList manually
+
+console.log(buttons);
+
+// REMOVE AN ELEMENT
+
+buttons.forEach(button => {
+    button.addEventListener('click', event => {
+        event.target.remove();
+        buttons = document.querySelectorAll('.myButtons');
+        console.log(buttons);
+    })
+});
+
+
+
+// classList = Element property in js used to interact with
+//            an element's list of classes(CSS classes)
+//            Allows you to make reusable code for many elements
+//            across your webpage
+
+
+
+// add()
+// remove()
+// toggle(Remove if present, Add if not)
+// replace(oldClass, newClass)
+// contains
+
+const myButton_ = document.getElementById('myButton_');
+
+myButton_.classList.add("enabled");
+myButton_.classList.remove("enabled");
