@@ -661,7 +661,8 @@ for(let fruit of fruits){
 }
 
 
-// ===> SPREAD OPERATORS = ... allows an iterable such as an array or string to be expanded into separate elements (unpack the elements)
+// ===> SPREAD OPERATORS = ... allows an iterable such as an array or string 
+//                       to be expanded into separate elements (unpack the elements)
 
 
 let nome = 'Cabral';
@@ -2225,5 +2226,249 @@ buttons.forEach(button => {
 
 const myButton_ = document.getElementById('myButton_');
 
-myButton_.classList.add("enabled");
-myButton_.classList.remove("enabled");
+myButton_.classList.add("enabled"); // applying css properties to the button
+// myButton_.classList.remove("enabled"); // removing it
+
+//myButton_.addEventListener('mouseover', event => {
+//    event.target.classList.add("hover");
+//})
+
+myButton_.addEventListener('mouseover', event => {
+    event.target.classList.toggle("hover");
+})
+
+myButton_.addEventListener('mouseout', event => {
+    event.target.classList.toggle("hover");
+})
+
+//myButton_.addEventListener('mouseout', event => {
+//    event.target.classList.remove("hover");
+//})
+
+myButton_.addEventListener('click', event => {
+
+    if(event.target.classList.contains("disabled")){
+        event.target.textContent += ':)';
+    }
+    else{
+        event.target.classList.replace("enabled", "disabled");
+    }
+
+    
+})
+
+const meuH1 = document.getElementById('meuH1');
+
+meuH1.classList.add('enabled');
+
+meuH1.addEventListener('click', event => {
+
+    if(event.target.classList.contains('disabled')){
+        event.target.textContent += ');'
+    }
+    else{
+        event.target.classList.replace('enabled', 'disabled');
+    }
+});
+
+let botoes = document.querySelectorAll('.meusBotoes');
+
+botoes.forEach(botao => {
+    botao.classList.add('enabled');
+});
+
+botoes.forEach(botao => {
+    botao.addEventListener('mouseover', event => {
+        event.target.classList.toggle('hover');
+    })
+});
+
+botoes.forEach(botao => {
+    botao.addEventListener('mouseout', event => {
+        event.target.classList.toggle('hover');
+    })
+});
+
+botoes.forEach(botao => {
+    botao.addEventListener('click', event => {
+
+        if(event.target.classList.contains('disabled')){
+            event.target.textContent += '):';
+        }
+        else{
+            event.target.classList.replace('enabled', 'disabled');
+        }
+
+    })
+});
+
+
+
+// ===> PROMISES = An object that manages asynchronous operations.
+//                 Wrap a Promise Object around {asynchronous code}
+//                 "I promise to return a value"
+//                 PENDING -> RESOLVED or REJECTED
+//                 new Promise((resolve, reject) => {asynchronous code})
+
+
+
+function walkDog(){
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        
+        const dogWalked = true;
+
+        if(dogWalked){
+            resolve('You walk the dog 🐕');
+        }
+        else{
+            reject("You DIDN'T walk the dog!")
+        }
+        
+        
+    }, 1500);
+    });
+}
+
+function cleanKitchen(){
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        
+        const kitchenCleaned = true;
+
+        if(kitchenCleaned){
+            resolve('You clean the kitchen 🧹');
+        }
+        else{
+            reject("You DIDN'T clean the kitchen");
+        }
+        
+    }, 2500);
+    })
+}
+
+function takeOutTrash(){
+
+    return new Promise((resolve, rejec) => {
+       setTimeout(() => {
+
+        const trashTakenOut = false;
+
+        if(trashTakenOut){
+            resolve('You take out the trash 🚮');
+        }
+        else{
+            rejec("You DIDN'T take out the trash!");
+        }
+        
+    }, 500); 
+    })
+}
+
+//walkDog().then(value => {console.log(value); return cleanKitchen()})
+//         .then(value => {console.log(value); return takeOutTrash()})
+//         .then(value => {console.log(value); console.log("You finished all the chores")})
+//         .catch(error => console.error(error));
+
+
+
+// ===> Async/Await 
+
+
+
+// Async = makes a function return a promise
+// Await = makes an async function wait for a promise
+// Allows you write asynchronous code in a synchronous manner
+// Async doesn't have resolve or reject parameters
+// Everything after Await is placed in an event queue
+
+async function doChores(){
+
+    try{
+       const walkDogResult = await walkDog();
+    console.log(walkDogResult);
+
+    const cleanKitchenResult = await cleanKitchen();
+    console.log(cleanKitchenResult);
+
+    const takeOutTrashResult = await takeOutTrash();
+    console.log(takeOutTrashResult);
+
+    console.log("You finished all the chores."); 
+    }
+    catch(error){
+        console.error(error);
+    }
+
+    
+}
+
+// doChores()
+
+
+
+// JSON = (JavaScript Oobject Notation) data-interchange format
+//        Used for exchanging data between a server and a web application
+//        JSON files {key:value} OR {value1, value2, value3}
+
+//        JSON.stringify() = converts a JS object to a JSON string
+//        JSON.parse() = converts a JSON string to a JS object
+
+
+const names = ["Spongebob", "Patrick", "Squidward", "Sandy"];
+const pessoa = {
+    "name": "Spongebob",
+    "age": 30,
+    "isEmployed": true,
+    "hobbies": ["Jellyfishing", "Karate", "cooking"]
+};
+const pessoas = [{
+    "name": "Spongebob",
+    "age": 30,
+    "isEmployed": true
+},
+{
+    "name": "Patrick",
+    "age": 34,
+    "isEmployed": false
+},
+{
+    "name": "Squidward",
+    "age": 50,
+    "isEmployed": true
+},
+{
+    "name": "Sandy",
+    "age": 27,
+    "isEmployed": false
+}];
+
+
+const jsonString = JSON.stringify(names);
+
+
+console.log(jsonString);
+
+
+const jsonNames = `["Spongebob","Patrick","Squidward","Sandy"]`;
+const jsonPerson = `{"name":"Spongebob","age":30,"isEmployed":true,"hobbies":["Jellyfishing","Karate","cooking"]}`;
+const jsonPeople = `[{"name":"Spongebob","age":30,"isEmployed":true},
+                    {"name":"Patrick","age":34,"isEmployed":false},
+                    {"name":"Squidward","age":50,"isEmployed":true},
+                    {"name":"Sandy","age":27,"isEmployed":false}]`;
+                
+const parsedData = JSON.parse(jsonPeople);
+
+console.log(parsedData);
+
+fetch("people.json")
+    .then(response => response.json())
+    .then(values => values.forEach(value => console.log(value.name)))
+    .catch(error => console.error(error))
+
+// Spongebob
+// Patrick
+// Squidward
+// Sandy
