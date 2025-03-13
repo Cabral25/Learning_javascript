@@ -2464,11 +2464,65 @@ const parsedData = JSON.parse(jsonPeople);
 console.log(parsedData);
 
 fetch("people.json")
-    .then(response => response.json())
-    .then(values => values.forEach(value => console.log(value.name)))
-    .catch(error => console.error(error))
+//    .then(response => response.json())
+//    .then(values => values.forEach(value => console.log(value.name)))
+//    .catch(error => console.error(error))
 
 // Spongebob
 // Patrick
 // Squidward
 // Sandy
+
+
+
+// ===> Fetch data from an API
+
+
+
+// fetch = Function used for making HTTP requests to fetch resources
+//         (JSON style data, images, files)
+//         Simplifies asynchronous data fetching in js and used
+//         for interacting with APIs to retrieve and send data
+//         asynchronously over the web
+//         fetch(url, {options})
+
+
+//fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+    .then(response => {
+
+        if(!response.ok){
+           throw new Error("Could not fetch resource");
+        }
+        return response.json();
+    })
+    .then(data_ => console.log(data_.name))
+    .catch(error => console.error(error));
+
+async function fetchData(){
+
+    try{
+
+        const pokemonName = document.getElementById('pokemonName').value.toLowerCase();
+
+        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+
+        if(!resposta.ok){
+            throw new Error("Could not fetch resource")
+        }
+
+        const dado = await resposta.json();
+        const pokemonSprite = dado.sprites.front_default;
+        const imgElement = document.getElementById('pokemonSprite');
+
+        imgElement.src = pokemonSprite;
+        imgElement.style.display = 'block';
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+document.getElementById("buscar").addEventListener("click", fetchData);
+
+
+// fim 13/03/25
