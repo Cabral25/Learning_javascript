@@ -694,7 +694,7 @@ const food3 = 'sushi';
 const food4 = 'meat';
 
 
-function openFridge(...foods){ // accept any number of arguments
+function openFridge(...foods){ // accept any number of arguments and returns an array
 //    console.log(foods); // ['pizza', 'hamburguer', 'sushi', 'meat']
     console.log(...foods); // pizza hamburguer sushi meat
 }
@@ -795,7 +795,7 @@ function display(elemento){
 
 
 
-// map() = accepts a callback and applies thtat function
+// map() = accepts a callback and applies that function
 // to each element of an array, then return a new array
 
 
@@ -1577,7 +1577,7 @@ let even = [1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
 countries.sort();
 console.log(countries); // ['albania', 'china', 'japan', 'zimbabwe']
 
-even.sort((A, B) => A - B); // REVERSE: B - A
+even.sort((A, B) => A - B); // DO MAIOR PRO MENOR: B - A
 console.log(even); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
