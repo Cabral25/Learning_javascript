@@ -1850,7 +1850,7 @@ console.dir(document);
 // Element selectors = Methods used to target and manipulate
 //                    HTML elements
 // 1. document.getElementById()       // ELEMENT OR NULL
-// 2. document.getElementsClassName() // HTML COLLECTION
+// 2. document.getElementsByClassName() // HTML COLLECTION
 // 3. document.getElementsByTagName() // HTML COLLECTION
 // 4. document.querySelector()        // FIRST ELEMENT OR NULL
 // 5. document.querySelectorAll()     // NODELIST
