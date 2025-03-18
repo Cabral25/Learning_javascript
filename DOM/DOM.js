@@ -99,26 +99,100 @@ header.classList.add('dom'); // não funciona ñ sei pq
 
 //-----------------exercício------------------------
 
-const addButton = document.getElementById('addTarefa');
 
-addButton.addEventListener('click', (event) => {
-    
-    const novoInput = document.createElement('input');
-    const novaLista = document.createElement('li');
-    const novoBotao = document.createElement('button');
+function adicionarTarefa(){
 
-    const valorInput = novoInput.value;
+    const lista_ = document.getElementById('lista');
 
-    novoInput.placeholder = 'Sua tarefa aqui';
-    novoInput.type = 'text';
+    const novoItem = document.createElement('li');
+    const tarefa = document.createElement('input');
+    const novoBotao_ = document.createElement('button');
+    const botaoCancelar = document.createElement('button');
 
-    novoBotao.textContent = 'Adicionar tarefa'
+    novoBotao_.textContent = 'salvar';
+    botaoCancelar.textContent = 'cancelar';
+    tarefa.placeholder = 'Sua tarefa aqui';
+    tarefa.id = 'input';
 
-    document.getElementById('toDoList').prepend(novoInput);
-    document.getElementById('toDoList').append(novoBotao);
+    tarefa.classList.add('tarefa');
+    novoBotao_.classList.add('botaoSalvar');
+    botaoCancelar.classList.add('botaoCancelar');
 
-    novoBotao.addEventListener('click', event => {
+    lista_.append(tarefa)
+    lista_.append(novoBotao_);
+    lista_.append(botaoCancelar);
 
-        pass
+    let valorInput = document.getElementById('input');
+
+    novoBotao_.addEventListener('click', event => {
+
+        if(valorInput.value === ''){
+            window.alert('insira uma tarefa');
+        }
+        else{
+            novoItem.textContent = valorInput.value;
+            lista_.appendChild(novoItem);
+            tarefa.remove();
+            novoBotao_.remove();
+            botaoCancelar.remove();
+        }
     })
-})
+
+    botaoCancelar.addEventListener('click', event => {
+
+        tarefa.remove();
+        novoBotao_.remove();
+        botaoCancelar.remove();
+    })
+}
+
+
+function removerTarefa(){
+
+    let tarefas = document.querySelectorAll('li');
+    const list = document.getElementById('lista');
+
+    const numeroTarefa = document.createElement('input');
+    const botaoExcluir = document.createElement('button');
+    const botaoCancelar_ = document.createElement('button');
+
+    numeroTarefa.placeholder = 'número da tarefa';
+    botaoExcluir.textContent = 'excluir';
+    botaoCancelar_.textContent = 'cancelar';
+
+    numeroTarefa.classList.add('tarefa');
+    botaoExcluir.classList.add('botaoSalvar');
+    botaoCancelar_.classList.add('botaoCancelar');
+
+    list.append(numeroTarefa);
+    list.append(botaoExcluir);
+    list.append(botaoCancelar_);
+
+    botaoExcluir.addEventListener('click', event => {
+
+        if(numeroTarefa.value === ''){
+            window.alert('entre com uma tarefa a ser excluída');
+        }
+        else{
+            let tarefaApagar = numeroTarefa.value;
+            if(tarefaApagar < 1 || tarefaApagar > tarefas.length){
+                window.alert('opção fora do range de opções');
+            }
+            else{
+                list.removeChild(tarefas[tarefaApagar - 1]);
+                numeroTarefa.remove();
+                botaoExcluir.remove();
+                botaoCancelar_.remove();
+                console.log(tarefas[tarefaApagar - 1]);
+            }
+        }
+    })
+
+    botaoCancelar_.addEventListener('click', event => {
+
+        numeroTarefa.remove();
+        botaoExcluir.remove();
+        botaoCancelar_.remove();
+    })
+
+}

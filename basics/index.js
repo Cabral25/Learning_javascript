@@ -2003,7 +2003,7 @@ document.getElementById('box1').append(newH1); // makes newH1 the last child of 
 const box2 = document.getElementById('box2');
 // document.body.insertBefore(newH1, box2); // inserindo newH1 antes de box2
 
-const boxes = document.querySelectorAll('.box'); // nodelist to selec many elements
+const boxes = document.querySelectorAll('.box'); // nodelist to select many elements
 // document.body.insertBefore(newH1, boxes[1]);
 
 // document.body.removeChild(newH1); // remove um elemento HTML do corpo(body)

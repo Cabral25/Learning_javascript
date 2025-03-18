@@ -7,3 +7,23 @@
     border: none;
     color: aqua;
 }
+
+.tarefa{
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px 3px;
+}
+
+.botaoSalvar{
+    border: none;
+    border-radius: 5px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+
+.botaoCancelar{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
