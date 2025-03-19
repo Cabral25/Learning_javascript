@@ -183,7 +183,6 @@ function removerTarefa(){
                 numeroTarefa.remove();
                 botaoExcluir.remove();
                 botaoCancelar_.remove();
-                console.log(tarefas[tarefaApagar - 1]);
             }
         }
     })
