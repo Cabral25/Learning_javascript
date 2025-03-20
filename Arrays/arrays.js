@@ -175,7 +175,8 @@ function espelharMatriz(matriz){
     const matrizEspelhada = [];
 
     for(let array of matriz){
-        matrizEspelhada.push(array.reverse());
+        let copia = [...array]; // reverse modifica o array original, por isso a cópia
+        matrizEspelhada.push(copia.reverse());
     }
 
     return matrizEspelhada;
@@ -202,7 +203,7 @@ function removeDuplicatas(array){
             arraySemRepetidos.push(number);
         }
     }
-    return arraySemRepetidos;
+    return arraySemRepetidos; // ou new Set(array)
 }
 
 const arrayRepetido = [1, 2, 3, 2, 4, 3, 5, 1];
@@ -227,3 +228,45 @@ const pessoas = [
 ];
 
 console.log(pegarNomes(pessoas)); // ['João', 'Maria', 'Pedro']
+
+
+// ------------------chatgpt---------------------------
+
+
+//usando o Algoritmo de Kadane
+
+function maiorSomaSubarray(array){
+
+    let maiorAtual = array[0];
+    let maiorGlobal = array[0];
+
+    for(let i = 1; i < array.length; i++) {
+        maiorAtual = Math.max(array[i], maiorAtual + array[i]);
+        maiorGlobal = Math.max(maiorGlobal, maiorAtual);
+    }
+
+    return maiorGlobal;
+}
+
+console.log(maiorSomaSubarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // 6
+
+
+function maisFrequente(array){
+
+    const contagem = {};
+    let elementoMaisFrequente = array[0];
+    let maxContagem = 0;
+
+    for (let number of array){
+        contagem[number] = (contagem[number] || 0) + 1;
+
+        if(contagem[number] > maxContagem){
+            maxContagem = contagem[number];
+            elementoMaisFrequente = number;
+        }
+    }
+
+    return elementoMaisFrequente;
+}
+
+console.log(maisFrequente([1, 3, 3, 7, 3, 2, 4, 2, 2, 2, 2])); // 2
