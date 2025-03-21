@@ -102,7 +102,7 @@ console.log(pessoa);
 const json = JSON.stringify(car); // convertendo um objeto para json
 console.log(json); // {"marca":"byd","modelo":"dolphin"}
 
-const paraObjeto = JSON.parse(json); // convertendo para objeto
+const paraObjeto = JSON.parse(json); // convertendo para objeto js
 console.log(paraObjeto); // {marca: 'byd', modelo: 'dolphin'}
 
 
@@ -143,3 +143,78 @@ const capitais = [
 
 console.log(filtraObjetos(capitais, 'brasil')); // [{brasil: 'brasília'}]
 console.log(capitais[0].hasOwnProperty('brasil'));
+
+
+const livro = {
+    titulo: 'Dom Casmurro',
+    autor: 'Machado de Assis',
+    anoPublicacao: 1898
+}
+
+livro.editora = 'nova editora';
+
+console.log(livro['editora']); // nova editora
+const livroAtualizado = {...livro, genero: 'drama'};
+
+
+function contaBancaria(titular, saldo){
+
+    this.titular = titular;
+    this.saldo = saldo;
+    this.depositar = function(valor){
+        this.saldo += valor;
+        console.log(`Valor de R$${valor} depositado com sucesso!`);
+    }
+}
+
+const conta = new contaBancaria('jéssica', 500);
+console.log(conta.titular); // jéssica
+
+conta.depositar(500);
+
+console.log(conta.saldo); // 1000
+
+
+function filtraCarros(objectsArray){
+
+    return objectsArray.filter(objeto => objeto.ano > 2020);
+}
+
+const carros = [
+    { marca: "Toyota", ano: 2022 },
+    { marca: "Ford", ano: 2018 },
+    { marca: "BMW", ano: 2020 }
+];
+
+console.log(filtraCarros(carros)); // [{marca: 'Toyota', ano: 2022}]
+
+const object1 = {
+    a: 1,
+    b: 2
+}
+const object2 = {
+    b: 3,
+    c: 4
+}
+
+Object.assign(object1, object2); // Copy the values of all of the enumerable own properties from one or more source objects to a target object.
+console.log(object1); // {a: 1, b: 3, c: 4}
+
+Object.assign(object2, object1);
+console.log(object2); // {b: 3, c: 4, a: 1}
+
+
+function mesclaObjetos(objeto1, objeto2){
+
+    return {...objeto1, ...objeto2};
+}
+
+console.log(mesclaObjetos(object1, object2)); // {a: 1, b: 3, c: 4}
+
+
+function converterpraArray(objeto){
+
+    return Object.entries(objeto);
+}
+
+console.log(converterpraArray(object1));
