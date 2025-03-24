@@ -195,3 +195,101 @@ function removerTarefa(){
     })
 
 }
+
+//---------------------RELEMBRANDO-------------------------
+
+
+console.log(meusParagrafos); // HTMLCollection
+//  [p.texto, p.texto, p.texto]
+console.log(meusParagrafos.length); // 3
+for(let paragrafo of meusParagrafos){
+    console.log(paragrafo.textContent);
+}
+// Parágrafo 1
+// Parágrafo 2
+// Parágrafo 3
+
+console.log(meusPs); // HTMLCollection
+// [h5#texto1, h5, h5, texto1: h5#texto1]
+for(let p of meusPs){
+    console.log(p.textContent);
+}
+// Novo Título
+// texto 2
+// texto 3
+
+console.log(meuP);
+// <h4>Texto alterado</h4>
+
+console.log(nodeList);
+// NodeList(3)
+// 0: h3.query
+// 1: h3.query
+// 2: h3.query
+// length: 3
+// [[Prototype]]: NodeList
+console.log(nodeList.length); // 3
+
+
+const link = document.querySelector('footer');
+
+link.setAttribute("href", "https://google.com");
+console.log(link.getAttribute('href'));
+link.removeAttribute('target');
+
+
+console.log(link.lastChild);
+
+
+//------------------Exercícios--------------------------
+
+
+let display = document.getElementById('display');
+
+const botaoAumentar = document.getElementById('incrementar');
+const botaoDiminuir = document.getElementById('decrementar');
+
+botaoAumentar.addEventListener('click', () => {
+
+    display.textContent++;
+})
+
+botaoDiminuir.addEventListener('click', () => {
+
+    if(display.textContent > 0){
+        display.textContent--;
+    }
+})
+
+
+
+const botaoNome = document.getElementById('enviar');
+let inputNome = document.getElementById('nome');
+
+botaoNome.addEventListener('click', event => {
+
+    event.preventDefault();
+
+    if(inputNome.value === ''){
+        alert('insira um nome!');
+    }
+})
+
+
+
+const botaoClaro = document.getElementById('claro');
+const botaoEscuro = document.getElementById('escuro');
+
+botaoClaro.addEventListener('click', () => {
+
+    document.body.style.backgroundColor = gerarCorAleatoria();
+})
+
+
+function gerarCorAleatoria(){
+
+    r = Math.trunc(Math.random() * 256);
+    g = Math.round(Math.random() * 256);
+    b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
