@@ -2409,7 +2409,7 @@ async function doChores(){
 
 
 
-// JSON = (JavaScript Oobject Notation) data-interchange format
+// JSON = (JavaScript Object Notation) data-interchange format
 //        Used for exchanging data between a server and a web application
 //        JSON files {key:value} OR {value1, value2, value3}
 
@@ -2424,6 +2424,8 @@ const pessoa = {
     "isEmployed": true,
     "hobbies": ["Jellyfishing", "Karate", "cooking"]
 };
+
+
 const pessoas = [{
     "name": "Spongebob",
     "age": 30,

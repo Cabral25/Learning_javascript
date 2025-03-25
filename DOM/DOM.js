@@ -263,22 +263,7 @@ botaoDiminuir.addEventListener('click', () => {
 
 
 
-const botaoNome = document.getElementById('enviar');
-let inputNome = document.getElementById('nome');
-
-botaoNome.addEventListener('click', event => {
-
-    event.preventDefault();
-
-    if(inputNome.value === ''){
-        alert('insira um nome!');
-    }
-})
-
-
-
 const botaoClaro = document.getElementById('claro');
-const botaoEscuro = document.getElementById('escuro');
 
 botaoClaro.addEventListener('click', () => {
 
@@ -293,3 +278,68 @@ function gerarCorAleatoria(){
     b = Math.floor(Math.random() * 256);
     return `rgb(${r}, ${g}, ${b})`;
 }
+
+
+
+
+const listaNova = document.getElementById('list');
+const botaoAdicionar = document.getElementById('adicionar');
+
+botaoAdicionar.addEventListener('click', () => {
+
+    const novoInput = document.createElement('input');
+    const novoBotao = document.createElement('button');
+    const novoLi = document.createElement('li');
+
+    novoBotao.textContent = 'salvar';
+    novoInput.placeholder = 'tarefa';
+
+    listaNova.append(novoInput);
+    listaNova.append(novoBotao);
+
+    novoBotao.addEventListener('click', () => {
+        if(novoInput.value === ''){
+            alert('404');
+        }
+        else{
+            novoLi.textContent = novoInput.value;
+            listaNova.appendChild(novoLi);
+            novoInput.remove();
+            novoBotao.remove();
+        }
+    })
+})
+
+
+const botaoAlternaModos = document.getElementById('botaoModoClaro');
+
+botaoAlternaModos.addEventListener('click', event => {
+
+    const corpo = document.getElementsByTagName('body');
+
+    corpo.classList.add('modoClaro');
+})
+
+// soluções chat gpt
+
+
+const formulario = document.getElementById('formulario');
+const nomeInput = document.getElementById('nome');
+const erroMsg = document.getElementById('erro');
+
+formulario.addEventListener('submit', (event) => {
+    if(nomeInput.value.trim() === ''){
+        event.preventDefault(); // impede o envio
+        erroMsg.textContent = 'Por favor, preencha o nome!';
+    }
+    else{
+        erroMsg.textContent = '';
+    }
+})
+
+
+const botaoModo = document.getElementById('modo');
+
+botaoModo.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+})
