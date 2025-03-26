@@ -8,8 +8,8 @@ let isRunning = false;
 function start(){
 
     if(!isRunning){
-        startTime = Date.now() - elapsedTime
-        timer = setInterval(update, 10)
+        startTime = Date.now() - elapsedTime;
+        timer = setInterval(update, 10);
         isRunning = true;
     }
 }
@@ -29,7 +29,7 @@ function reset(){
     startTime = 0;
     elapsedTime = 0;
     isRunning = false;
-    display.textContent = `00:00:00:00`
+    display.textContent = `00:00:00:00`;
 
 }
 

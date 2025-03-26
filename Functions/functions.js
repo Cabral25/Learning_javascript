@@ -126,16 +126,151 @@ function contador(){
 
     function contar(){
         contador++;
-        console.log('+1');
+        console.log(contador);
     }
 
     function getCounter(){
-        console.log(contador);
+        return contador;
     }
 
     return {contar, getCounter};
 }
 
 const contar = contador();
-console.log(contar.contar()); // +1
+contar.contar(); // +1
 console.log(contar.getCounter()); // 1
+contar.contar(); // +1
+
+
+const gerarSenha = (tamanho) => {
+    const letrasMinusculas = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+    const letrasMaiusculas = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+    const numeros = String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+    const arrayChar = [letrasMaiusculas, letrasMinusculas, numeros];
+
+    let senha = '';
+
+    for(let i=tamanho; i > 0; i--){
+        senha += arrayChar[Math.floor(Math.random() * 3)];
+    }
+
+    return senha;
+}
+
+// console.log(String.fromCharCode(97)); // a
+// console.log(String.fromCharCode(122)); // z
+// console.log(String.fromCharCode(65)); // A
+// console.log(String.fromCharCode(90)); // Z
+
+// console.log(String.fromCharCode(48)); // 0
+// console.log(String.fromCharCode(57)); // 9
+
+// console.log(Math.ceil(Math.random()) * 100);
+
+console.log(gerarSenha(7));
+
+
+function filtrarMensagem(mensagem, palavrasProibidas){
+
+    let mensagemFiltrada = '';
+
+    for(let palavra of mensagem.split(' ')){
+        if(!palavrasProibidas.includes(palavra)){
+            mensagemFiltrada += palavra + ' ';
+        };
+    }
+
+    return mensagemFiltrada;
+}
+
+console.log(filtrarMensagem('JavaScript é incrível, mas Python também!', ['Python']));
+
+
+
+function temporizador(segundos){
+
+    let contador = segundos;
+
+    const intervalo = setInterval(() => {
+        console.log(contador);
+        contador--;
+
+        if(contador === 0){
+            clearInterval(intervalo); // interrompe o setInterval
+            console.log('BOOM!');
+        }
+    }, 1000);
+}
+
+// temporizador(5);
+
+
+
+function multiplicador(numero){
+
+    return function triplicar(n){
+        return numero * n;
+    };
+}
+
+const triplicar = multiplicador(2);
+console.log(triplicar(5)); // 10
+
+const duplicar = multiplicador(7);
+console.log(duplicar(2)); // 14
+
+
+// ---------------SOLUÇÕES CHATGPT-------------------------
+
+
+
+const gerarSenha2 = (tamanho) => {
+
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let senha = '';
+
+    for(let i = 0; i < tamanho; i++){
+        senha += caracteres[Math.floor(Math.random() * caracteres.length)];
+    }
+
+    return senha;
+}
+
+console.log(gerarSenha2(8));
+
+
+function filtrarMensagem2(mensagem, palavrasProibidas){
+
+    return mensagem
+        .split(' ')
+        .filter(palavra => !palavrasProibidas.includes(palavra))
+        .join(' ');
+}
+
+console.log(filtrarMensagem("Eu amo JavaScript mas odeio bugs", ["odeio"]));
+
+
+function multiplicador2(numero){
+    return n => numero * n;
+}
+
+const triple = multiplicador(2);
+console.log(triple(5)); // 10
+
+
+// ----------------EXERCÍCIOS---------------------------
+
+
+async function buscarUsuario(pokemon){
+
+    try{
+        const dados = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+        const resposta = dados.json();
+        console.log(resposta.name);
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+buscarUsuario('pikachu').then(console.log());
