@@ -261,11 +261,14 @@ console.log(triple(5)); // 10
 // ----------------EXERCÍCIOS---------------------------
 
 
-async function buscarUsuario(pokemon){
+async function buscarPokemon(pokemon){
 
     try{
         const dados = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-        const resposta = dados.json();
+        if(!dados.ok){
+            throw new Error('could not fetch resource');
+        }
+        const resposta = await dados.json();
         console.log(resposta.name);
     }
     catch(error){
@@ -273,4 +276,180 @@ async function buscarUsuario(pokemon){
     }
 }
 
-buscarUsuario('pikachu').then(console.log());
+// buscarPokemon('charmander').then(console.log());
+
+
+
+async function buscarUsuario(id){
+
+    try{
+        const resposta = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        if(!resposta.ok){
+            throw new Error('Não foi possível fazer a requisição.');
+        }
+
+        const dados = await resposta.json();
+        console.log(dados);
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+// buscarUsuario(2);
+
+
+
+function esperar(segundos){
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('Sucesso');
+        }, segundos * 1000)
+    })
+}
+
+async function main(){
+
+    console.log('Iniciando...');
+    const result = await esperar(3);
+    console.log(result);
+}
+
+// main();
+
+
+function buscarPost(id){
+
+    return new Promise((resolve, reject) => {
+        const post = fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
+        
+        if(post.ok){
+            const posts = post.json();
+            resolve(posts);
+        }
+        else{
+            reject('Não foi possível buscar o post.')
+        }
+    })
+}
+
+
+async function buscarPostsDeUsuarios(ids){
+
+    try{
+        const dados = await Promise.all();
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+
+// buscarPost(1);
+
+
+
+async function buscarProduto(id) {
+    
+    try{
+        const produto = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if(!produto.ok){
+            throw new Error('Erro!');
+        }
+        else{
+            console.log(produto);
+        }
+    }
+    catch(erro){
+        console.error('Erro ao buscar o produto');
+    }
+}
+
+// console.log(buscarProduto(1));
+
+
+
+async function executarEmSequencia(arrayFuncoes) {
+    
+    //sei lá
+}
+
+
+// ----------------SOLUÇÕES CHATGPT--------------------
+
+
+
+async function buscarPostsDeUsuarios2(ids) {
+    
+    try{
+        const promessas = ids.map(async (id) => { // map() cria um array de promises
+            const resposta = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
+            if(!resposta.ok){
+                throw new Error(`Erro ao buscar posts do usuário ${id}`);
+            }
+            return await resposta.json(); // transforma cada resposta em json
+        });
+
+        const posts = await Promise.all(promessas); // espera todas as requisições terminaresm antes de continuar
+        console.log(posts);
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+// buscarPostsDeUsuarios2([1, 2, 3]); 
+const n = [1, 2, 3]
+console.log(n.filter(num => num % 2 !== 0));
+
+
+
+async function executarEmSequencia2(funcoes) {
+    
+    const resultados = [];
+
+    for(const func of funcoes){ 
+        //  A cada iteração, func recebe um novo valor da array funcoes.
+        // O const impede que func seja reatribuído dentro do loop,
+        //  mas ele pode mudar a cada iteração.
+        // Isso significa que cada valor de func dura apenas uma iteração, 
+        // e na próxima iteração, um novo valor é atribuído a func.
+        const resultado = await func(); 
+        resultados.push(resultado);    
+    }
+
+    return resultados;
+}
+
+const func1 = async () => {await esperar(2); return 'Função 1 concluída';};
+const func2 = async () => {await esperar(5); return "Função 2 concluída";};
+
+// executarEmSequencia2([func1, func2]).then(console.log);
+
+
+
+// --------------------MINHAS SOLUÇÕES---------------------
+
+
+
+async function buscarDadosSequencial(id){
+
+    try{
+        const usuario = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        const posts = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        if(!usuario.ok && !posts.ok){
+            throw new Error('Could not fetch data.');
+        }
+        else{
+            const dado = await usuario.json();
+            const postsEmJs = await posts.json();
+            console.log(`Autor(a): ${dado.name}\nTexto:\n${postsEmJs.body}`);
+        }
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+buscarDadosSequencial(4);
