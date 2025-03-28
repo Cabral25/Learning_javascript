@@ -399,9 +399,7 @@ async function buscarPostsDeUsuarios2(ids) {
     }
 }
 
-// buscarPostsDeUsuarios2([1, 2, 3]); 
-const n = [1, 2, 3]
-console.log(n.filter(num => num % 2 !== 0));
+// buscarPostsDeUsuarios2([1, 2, 3]);
 
 
 
@@ -438,7 +436,7 @@ async function buscarDadosSequencial(id){
     try{
         const usuario = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
         const posts = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-        if(!usuario.ok && !posts.ok){
+        if(!usuario.ok || !posts.ok){
             throw new Error('Could not fetch data.');
         }
         else{
@@ -452,4 +450,148 @@ async function buscarDadosSequencial(id){
     }
 }
 
-buscarDadosSequencial(4);
+// buscarDadosSequencial(4);
+
+
+
+async function buscarUsuario_(id){
+
+    try{
+        const dados = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        if(dados.ok){
+            return await dados.json();
+        }
+        else{
+            return 'Could not fetch data.';
+        }
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+
+async function buscarPosts(id){
+
+    try{
+        const posts = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        if(posts.ok){
+            return await posts.json();
+        }
+        else{
+            return 'Could not fetch data.'
+        }
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+
+async function buscarDadosParalelo(id){
+
+    try{
+        const informacoes = await Promise.all([buscarUsuario_(id), buscarPosts(id)]);
+        console.log(`Nome: ${informacoes[0].name}, \ntextos:\n${informacoes[1].body}`);
+        
+    }
+    catch(erro){
+        console.error(erro);
+    }
+}
+
+// buscarDadosParalelo(9);
+
+
+
+function fazerLogin(usuario, senha){
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if(usuario === 'admin' && String(senha) === 1234){
+                resolve('Login bem-sucedido!');
+            }
+            else{
+                reject('Usuário ou senha incorretos!');
+            }
+        }, 3000)
+    })
+}
+
+// fazerLogin('admin', 1234).then(value => {console.log(value)})
+                         // .catch(erro => console.error(erro));
+
+
+
+async function tentarRequisicao(url, tentativas){
+
+    let tentativasAteAgora = 0;
+    let resposta;
+
+    try{
+        while(tentativas > tentativasAteAgora){
+            resposta = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const dados = fetch(url);
+                    if(dados.ok){
+                        resolve('Success!');
+                    }
+                    else{
+                        reject('Failed. Trying again...');
+                        tentativasAteAgora++;
+                    }
+                }, 3000)
+            })
+        }
+    }
+    catch(erro){
+        console.error(erro);
+    }
+
+    return resposta;
+}
+
+
+
+async function processarFila(tarefas){
+
+    for(const [index, func] of tarefas.entries()){
+        const resposta = await func();
+        console.log(`Tarefa ${index + 1}:`, resposta);
+    }
+}
+
+
+const funcao1 = async () => {await esperar(3); return 'tarefa 1 concluída'};
+const funcao2 = async () => {await esperar(5); return 'tarefa 2 concluída'};
+
+// processarFila([funcao1, funcao2]);
+
+
+
+// --------------------SOLUÇÕES CHATGPT---------------------
+
+
+
+async function tentarRequisicao(url, tentativas) {
+    let tentativaAtual = 0;
+
+    while (tentativaAtual < tentativas) {
+        try {
+            const resposta = await fetch(url);
+            if (resposta.ok) {
+                return await resposta.json();
+            }
+        } catch (erro) {
+            console.erro(`Tentativa ${tentativaAtual + 1} falhou. Tentando novamente...`);
+        }
+
+        tentativaAtual++;
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Espera 2s antes de tentar de novo
+    }
+
+    throw new Error('Todas as tentativas falharam.');
+}
+
+
+tentarRequisicao('google.com', 3);
